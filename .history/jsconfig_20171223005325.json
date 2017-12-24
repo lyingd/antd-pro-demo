@@ -1,0 +1,38 @@
+{
+	"compilerOptions": {
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
+		"target": "es6",
+		"jsx": "react",
+		"sourceMap": true,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"baseUrl": "./",
+		"paths": {
+			"@assets/*": [
+				"src/assets/*"
+			],
+			"@common/*": [
+				"src/common/*"
+			],
+			"@utils/*": [
+				"src/utils/*"
+			],
+			"@components/*": [
+				"src/components/*"
+			],
+			"@layouts/*": [
+				"src/layouts/*"
+			],
+			"@models/*": [
+				"src/models/*"
+			],
+			"@routes/*": [
+				"src/routes/*"
+			],
+			"@services/*": [
+				"src/services/*"
+			]
+		}
+	}
+}

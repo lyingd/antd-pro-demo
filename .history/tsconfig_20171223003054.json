@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+			"allowJs": true,
+			"allowSyntheticDefaultImports": true,
+			"target": "es6",
+			"jsx": "react",
+			"sourceMap": true,
+			"emitDecoratorMetadata": true,
+			"experimentalDecorators": true,
+			"baseUrl": ".",
+			"paths": {
+					"~/*" : ["*"]
+			}
+	}
+}
