@@ -8,7 +8,7 @@
     "start": "roadhog server",
     "start:no-proxy": "cross-env NO_PROXY=true roadhog server",
     "build": "roadhog build",
-    "clean": "npm run clean-cache && rm -rf node_modules/ && yarn",
+    "clean": "rm -rf node_modules/ && yarn",
     "site": "roadhog-api-doc static && gh-pages -d dist",
     "analyze": "roadhog build --analyze",
     "lint:style": "stylelint \"src/**/*.less\" --syntax less",
