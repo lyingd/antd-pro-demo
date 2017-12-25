@@ -8188,9 +8188,9 @@ roadhog-api-doc@^0.3.3:
     portfinder "^1.0.13"
     shelljs "^0.7.8"
 
-"roadhog@git://github.com/lyingd/roadhog.git#prod-source-map":
-  version "1.3.1"
-  resolved "git://github.com/lyingd/roadhog.git#97e23f5c52140009b9deda3b5afddf4b96bf2c62"
+roadhog@^1.3.1:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/roadhog/-/roadhog-1.3.3.tgz#8f5337e7fb882d34b96d966df003c784a3567dd6"
   dependencies:
     atool-monitor "^0.4.3"
     autoprefixer "^7.1.1"
