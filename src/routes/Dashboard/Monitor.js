@@ -3,10 +3,10 @@ import { connect } from 'dva'
 import { Row, Col, Card, Tooltip } from 'antd'
 import numeral from 'numeral'
 
-import { Pie, WaterWave, Gauge, TagCloud } from '~/components/Charts'
-import NumberInfo from '~/components/NumberInfo'
-import CountDown from '~/components/CountDown'
-import ActiveChart from '~/components/ActiveChart'
+import { Pie, WaterWave, Gauge, TagCloud } from '~src/components/Charts'
+import NumberInfo from '~src/components/NumberInfo'
+import CountDown from '~src/components/CountDown'
+import ActiveChart from '~src/components/ActiveChart'
 
 import styles from './Monitor.less'
 
@@ -61,7 +61,7 @@ export default class Monitor extends PureComponent {
               </Row>
               <div className={styles.mapChart}>
                 <Tooltip title="等待后期实现">
-                  <img src="https://gw.alipayobjects.com/zos/rmsportal/HBWnDEUXCnGnGrRfrpKa.png" alt="map" />
+                  <img src="/eximages/HBWnDEUXCnGnGrRfrpKa.png" alt="map" />
                 </Tooltip>
               </div>
             </Card>

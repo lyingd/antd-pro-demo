@@ -12,9 +12,9 @@ import AvatarList from 'ant-design-pro/lib/AvatarList';
 
 ReactDOM.render(
   <AvatarList size="mini">
-    <AvatarList.Item tips="Jake" src="https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png" />
-    <AvatarList.Item tips="Andy" src="https://gw.alipayobjects.com/zos/rmsportal/sfjbOqnsXXJgNCjCzDBL.png" />
-    <AvatarList.Item tips="Niko" src="https://gw.alipayobjects.com/zos/rmsportal/kZzEzemZyKLKFsojXItE.png" />
+    <AvatarList.Item tips="Jake" src="/eximages/zOsKZmFRdUtvpqCImOVY.png" />
+    <AvatarList.Item tips="Andy" src="/eximages/sfjbOqnsXXJgNCjCzDBL.png" />
+    <AvatarList.Item tips="Niko" src="/eximages/kZzEzemZyKLKFsojXItE.png" />
   </AvatarList>
 , mountNode);
 ````

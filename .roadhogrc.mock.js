@@ -1,15 +1,15 @@
-import mockjs from 'mockjs';
-import { getRule, postRule } from './mock/rule';
-import { getActivities, getNotice, getFakeList } from './mock/api';
-import { getFakeChartData } from './mock/chart';
-import { imgMap } from './mock/utils';
-import { getProfileBasicData } from './mock/profile';
-import { getProfileAdvancedData } from './mock/profile';
-import { getNotices } from './mock/notices';
-import { format, delay } from 'roadhog-api-doc';
+import mockjs from 'mockjs'
+import { getRule, postRule } from './mock/rule'
+import { getActivities, getNotice, getFakeList } from './mock/api'
+import { getFakeChartData } from './mock/chart'
+import { imgMap } from './mock/utils'
+import { getProfileBasicData } from './mock/profile'
+import { getProfileAdvancedData } from './mock/profile'
+import { getNotices } from './mock/notices'
+import { format, delay } from 'roadhog-api-doc'
 
 // 是否禁用代理
-const noProxy = process.env.NO_PROXY === 'true';
+const noProxy = process.env.NO_PROXY === 'true'
 
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
 const proxy = {
@@ -24,7 +24,7 @@ const proxy = {
     },
     $body: {
       name: 'Serati Ma',
-      avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+      avatar: '/eximages/BiazfanxmamNRoxxVxka.png',
       userid: '00000001',
       notifyCount: 12,
     },
@@ -59,7 +59,7 @@ const proxy = {
     $body: postRule,
   },
   'POST /api/forms': (req, res) => {
-    res.send({ message: 'Ok' });
+    res.send({ message: 'Ok' })
   },
   'GET /api/tags': mockjs.mock({
     'list|100': [{ name: '@city', 'value|1-100': 150, 'type|0-2': 1 }]
@@ -68,17 +68,24 @@ const proxy = {
   'GET /api/fake_chart_data': getFakeChartData,
   'GET /api/profile/basic': getProfileBasicData,
   'GET /api/profile/advanced': getProfileAdvancedData,
-  'POST /api/login/account': (req, res) => {
-    const { password, userName, type } = req.body;
-    res.send({
-      status: password === '888888' && userName === 'admin' ? 'ok' : 'error',
-      type,
-    });
+  'POST /api/user/login': (req, res) => {
+    const { password, userName, type } = req.body
+    const ret = password === '888888' && userName === '18888888888' ? {
+      code: 0,
+      data: {
+        status: 'ok',
+        type,
+      }
+    } : {
+        code: -1,
+        data: '用户名或密码错误'
+      }
+    res.send(ret)
   },
   'POST /api/register': (req, res) => {
-    res.send({ status: 'ok' });
+    res.send({ status: 'ok' })
   },
   'GET /api/notices': getNotices,
-};
+}
 
-export default noProxy ? {} : delay(proxy, 1000);
+export default noProxy ? {} : delay(proxy, 1000)

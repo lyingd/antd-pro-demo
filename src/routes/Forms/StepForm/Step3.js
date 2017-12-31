@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Row, Col } from 'antd'
 import { routerRedux } from 'dva/router'
-import Result from '~/components/Result'
+import Result from '~src/components/Result'
 import styles from './style.less'
 
 export default ({ dispatch, data }) => {

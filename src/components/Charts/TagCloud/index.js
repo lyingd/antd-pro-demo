@@ -9,7 +9,7 @@ import styles from './index.less'
 /* eslint no-underscore-dangle: 0 */
 /* eslint no-param-reassign: 0 */
 
-const imgUrl = 'https://gw.alipayobjects.com/zos/rmsportal/gWyeGLCdFFRavBGIDzWk.png'
+const imgUrl = '/eximages/gWyeGLCdFFRavBGIDzWk.png'
 
 class TagCloud extends PureComponent {
   componentDidMount() {

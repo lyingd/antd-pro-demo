@@ -4,10 +4,10 @@ import { Row, Col, Icon, Card, Tabs, Table, Radio, DatePicker, Tooltip, Menu, Dr
 import numeral from 'numeral'
 import {
   ChartCard, yuan, MiniArea, MiniBar, MiniProgress, Field, Bar, Pie, TimelineChart,
-} from '~/components/Charts'
-import Trend from '~/components/Trend'
-import NumberInfo from '~/components/NumberInfo'
-import { getTimeDistance } from '~/utils/utils'
+} from '~src/components/Charts'
+import Trend from '~src/components/Trend'
+import NumberInfo from '~src/components/NumberInfo'
+import { getTimeDistance } from '~src/utils/utils'
 
 import styles from './Analysis.less'
 

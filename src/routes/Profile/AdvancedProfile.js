@@ -4,8 +4,8 @@ import Bind from 'lodash-decorators/bind'
 import { connect } from 'dva'
 import { Button, Menu, Dropdown, Icon, Row, Col, Steps, Card, Popover, Badge, Table, Tooltip, Divider } from 'antd'
 import classNames from 'classnames'
-import PageHeaderLayout from '~/layouts/PageHeaderLayout'
-import DescriptionList from '~/components/DescriptionList'
+import PageHeaderLayout from '~src/layouts/PageHeaderLayout'
+import DescriptionList from '~src/components/DescriptionList'
 import styles from './AdvancedProfile.less'
 
 const { Step } = Steps
@@ -212,7 +212,7 @@ export default class AdvancedProfile extends Component {
     return (
       <PageHeaderLayout
         title="单号：234231029431"
-        logo={<img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/nxkuOJlFJuAUhzlMTCEe.png" />}
+        logo={<img alt="" src="/eximages/nxkuOJlFJuAUhzlMTCEe.png" />}
         action={action}
         content={description}
         extraContent={extra}

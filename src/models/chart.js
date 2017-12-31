@@ -1,4 +1,4 @@
-import { fakeChartData } from '~/services/api'
+import { fakeChartData } from '~src/services/api'
 
 export default {
   namespace: 'chart',

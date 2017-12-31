@@ -1,5 +1,5 @@
 import fetch from 'dva/fetch'
-import { notification } from 'antd'
+import { notification, message } from 'antd'
 
 const codeMessage = {
   200: '服务器成功返回请求的数据',
@@ -32,14 +32,39 @@ function checkStatus(response) {
   throw error
 }
 
+function checkResponseData(respData) {
+  if (respData.code === 0) {
+    return respData.data
+  } else if (!respData.code) {
+    return respData
+  } else {
+    const error = new Error(respData.data)
+    error.code = respData.code
+    throw error
+  }
+}
+
+function checkResponseDataAndShowError(respData) {
+  if (respData.code === 0) {
+    return respData.data
+  } else if (!respData.code) {
+    return respData
+  } else {
+    message.error(`[${respData.code}] ${respData.data}`)
+    const error = new Error(respData.data)
+    error.code = respData.code
+    throw error
+  }
+}
+
 /**
  * Requests a URL, returning a promise.
  *
  * @param  {string} url       The URL we want to request
- * @param  {object} [options] The options we want to pass to "fetch"
+ * @param  {object} [options] The options we want to pass to "fetch", except "showError"
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(url, options) {
+export default function request(url, { showError = true, ...options } = {}) {
   const defaultOptions = {
     credentials: 'include',
   }
@@ -61,4 +86,5 @@ export default function request(url, options) {
       }
       return response.json()
     })
+    .then(showError ? checkResponseDataAndShowError : checkResponseData)
 }

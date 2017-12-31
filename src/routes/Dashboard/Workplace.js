@@ -4,9 +4,9 @@ import { connect } from 'dva'
 import { Link } from 'dva/router'
 import { Row, Col, Card, List, Avatar } from 'antd'
 
-import PageHeaderLayout from '~/layouts/PageHeaderLayout'
-import EditableLinkGroup from '~/components/EditableLinkGroup'
-import { Radar } from '~/components/Charts'
+import PageHeaderLayout from '~src/layouts/PageHeaderLayout'
+import EditableLinkGroup from '~src/components/EditableLinkGroup'
+import { Radar } from '~src/components/Charts'
 
 import styles from './Workplace.less'
 
@@ -41,31 +41,31 @@ const members = [
   {
     id: 'members-1',
     title: '科学搬砖组',
-    logo: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
+    logo: '/eximages/BiazfanxmamNRoxxVxka.png',
     link: '',
   },
   {
     id: 'members-2',
     title: '程序员日常',
-    logo: 'https://gw.alipayobjects.com/zos/rmsportal/cnrhVkzwxjPwAaCfPbdc.png',
+    logo: '/eximages/cnrhVkzwxjPwAaCfPbdc.png',
     link: '',
   },
   {
     id: 'members-3',
     title: '设计天团',
-    logo: 'https://gw.alipayobjects.com/zos/rmsportal/gaOngJwsRYRaVAuXXcmB.png',
+    logo: '/eximages/gaOngJwsRYRaVAuXXcmB.png',
     link: '',
   },
   {
     id: 'members-4',
     title: '中二少女团',
-    logo: 'https://gw.alipayobjects.com/zos/rmsportal/ubnKSIfAJTxIgXOKlciN.png',
+    logo: '/eximages/ubnKSIfAJTxIgXOKlciN.png',
     link: '',
   },
   {
     id: 'members-5',
     title: '骗你学计算机',
-    logo: 'https://gw.alipayobjects.com/zos/rmsportal/WhxKECPNujWoWEFNdnJE.png',
+    logo: '/eximages/WhxKECPNujWoWEFNdnJE.png',
     link: '',
   },
 ]
@@ -139,7 +139,7 @@ export default class Workplace extends PureComponent {
     const pageHeaderContent = (
       <div className={styles.pageHeaderContent}>
         <div className={styles.avatar}>
-          <Avatar size="large" src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
+          <Avatar size="large" src="/eximages/BiazfanxmamNRoxxVxka.png" />
         </div>
         <div className={styles.content}>
           <div className={styles.contentTitle}>早安，曲丽丽，祝你开心每一天！</div>

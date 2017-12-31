@@ -1,4 +1,4 @@
-import { fakeRegister } from '~/services/api'
+import { fakeRegister } from '~src/services/api'
 
 export default {
   namespace: 'register',

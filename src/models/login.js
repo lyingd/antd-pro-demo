@@ -1,11 +1,13 @@
 import { routerRedux } from 'dva/router'
-import { fakeAccountLogin } from '~/services/api'
+import { userLogin } from '~src/services/user'
+import { getCurrentTimestamp } from '~src/utils/utils'
 
 export default {
   namespace: 'login',
 
   state: {
     status: undefined,
+    errorLogs: [],
   },
 
   effects: {
@@ -14,14 +16,33 @@ export default {
         type: 'changeSubmitting',
         payload: true,
       })
-      const response = yield call(fakeAccountLogin, payload)
-      yield put({
-        type: 'changeLoginStatus',
-        payload: response,
-      })
-      // Login successfully
-      if (response.status === 'ok') {
-        yield put(routerRedux.push('/'))
+      try {
+        const response = yield call(userLogin, payload)
+        if (response.status === 'ok') {
+          yield put({
+            type: 'changeLoginStatus',
+            payload: {
+              status: response.status,
+              errorLogs: [],
+            },
+          })
+          yield put(routerRedux.push('/'))
+        } else {
+          yield put({
+            type: 'logError',
+            payload: {
+              time: getCurrentTimestamp(),
+            },
+          })
+        }
+      } catch (e) {
+        yield put({
+          type: 'logError',
+          payload: {
+            time: getCurrentTimestamp(),
+            error: e,
+          },
+        })
       }
     },
     *logout(_, { put }) {
@@ -36,11 +57,11 @@ export default {
   },
 
   reducers: {
-    changeLoginStatus(state, { payload }) {
+    changeLoginStatus(state, { payload: { status, errorLogs = [] } }) {
       return {
         ...state,
-        status: payload.status,
-        type: payload.type,
+        status,
+        errorLogs,
         submitting: false,
       }
     },
@@ -48,6 +69,17 @@ export default {
       return {
         ...state,
         submitting: payload,
+      }
+    },
+    logError(state, { payload }) {
+      return {
+        ...state,
+        errorLogs: [
+          ...state.errorLogs,
+          payload,
+        ],
+        status: 'error',
+        submitting: false,
       }
     },
   },

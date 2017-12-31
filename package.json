@@ -40,7 +40,8 @@
     "react-container-query": "^0.9.1",
     "react-document-title": "^2.0.3",
     "react-dom": "^16.0.0",
-    "react-fittext": "^1.0.0"
+    "react-fittext": "^1.0.0",
+    "redux-persist": "^5.4.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
@@ -91,11 +92,14 @@
     "plugins": [
       "transform-decorators-legacy",
       "transform-class-properties",
-      ["module-resolver", { 
-        "alias": {
-            "~": "./src"
+      [
+        "module-resolver",
+        {
+          "alias": {
+            "~src": "./src"
           }
-      }]
+        }
+      ]
     ]
   },
   "jest": {
@@ -115,8 +119,8 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,jsx}": "lint-staged:js",
-    "**/*.less": "stylelint --syntax less"
+    "src/**/*.{js,jsx}": "lint-staged:js",
+    "src/**/*.less": "stylelint --syntax less"
   },
   "browserslist": [
     "> 1%",

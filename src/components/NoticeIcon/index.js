@@ -17,7 +17,7 @@ export default class NoticeIcon extends PureComponent {
       emptyText: '暂无数据',
       clear: '清空',
     },
-    emptyImage: 'https://gw.alipayobjects.com/zos/rmsportal/wAhyIChODzsoKIOBHcBk.svg',
+    emptyImage: '/eximages/wAhyIChODzsoKIOBHcBk.svg',
   }
   static Tab = TabPane
   constructor(props) {

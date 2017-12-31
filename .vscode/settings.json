@@ -39,6 +39,6 @@
 	"typescript.quickSuggestionsForPaths": false,
 	"eslint.autoFixOnSave": true,
 	"path-intellisense.mappings": {
-		"~": "${workspaceRoot}/src"
+		"~src": "${workspaceRoot}/src"
 	}
 }

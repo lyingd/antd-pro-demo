@@ -3,9 +3,9 @@ import moment from 'moment'
 import { connect } from 'dva'
 import { Row, Col, Form, Card, Select, List } from 'antd'
 
-import StandardFormRow from '~/components/StandardFormRow'
-import TagSelect from '~/components/TagSelect'
-import AvatarList from '~/components/AvatarList'
+import StandardFormRow from '~src/components/StandardFormRow'
+import TagSelect from '~src/components/TagSelect'
+import AvatarList from '~src/components/AvatarList'
 
 import styles from './Projects.less'
 

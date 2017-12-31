@@ -3,7 +3,7 @@
   "extraBabelPlugins": [
     ["module-resolver", { 
       "alias": {
-					"~": "./src"
+					"~src": "./src"
 				}
 		}],
     "transform-runtime",
