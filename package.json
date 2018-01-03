@@ -20,6 +20,15 @@
     "test:all": "node ./tests/run-tests.js"
   },
   "dependencies": {
+    "@types/classnames": "^2.2.3",
+    "@types/enzyme": "^3.1.6",
+    "@types/jest": "^22.0.0",
+    "@types/lodash": "^4.14.91",
+    "@types/numeral": "^0.0.22",
+    "@types/prop-types": "^15.5.2",
+    "@types/qs": "^6.5.1",
+    "@types/react": "^16.0.33",
+    "@types/react-dom": "^16.0.3",
     "antd": "^3.0.0",
     "babel-polyfill": "^6.26.0",
     "babel-runtime": "^6.9.2",
@@ -66,7 +75,6 @@
     "eslint-plugin-jsx-a11y": "^6.0.0",
     "eslint-plugin-markdown": "^1.0.0-beta.6",
     "eslint-plugin-react": "^7.0.1",
-    "gh-pages": "^1.0.0",
     "husky": "^0.14.3",
     "jest": "^21.0.1",
     "lint-staged": "^4.3.0",
