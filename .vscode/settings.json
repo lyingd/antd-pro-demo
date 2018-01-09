@@ -1,5 +1,5 @@
 {
-	"editor.insertSpaces": false,
+	"editor.insertSpaces": true,
 	"files.autoSave": "onWindowChange",
 	"workbench.activityBar.visible": true,
 	"workbench.statusBar.visible": true,
@@ -36,7 +36,7 @@
 		"suppressUpdateNotice": true,
 		"suppressWelcomeNotice": true
 	},
-	"typescript.quickSuggestionsForPaths": false,
+	"typescript.quickSuggestionsForPaths": true,
 	"eslint.autoFixOnSave": true,
 	"path-intellisense.mappings": {
 		"~src": "${workspaceRoot}/src"
