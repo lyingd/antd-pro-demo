@@ -1,3 +1,4 @@
+import mockjs from 'mockjs'
 import { getUrlParams } from './utils'
 
 const titles = [
@@ -287,9 +288,17 @@ export const getActivities = [
   },
 ]
 
+const forms = (req, res) => {
+  res.send({ message: 'Ok' })
+}
+const tags = [mockjs.mock({
+  'list|100': [{ name: '@city', 'value|1-100': 150, 'type|0-2': 1 }],
+})]
 
 export default {
-  getNotice,
-  getActivities,
-  getFakeList,
+  'GET /api/project/notice': getNotice,
+  'GET /api/activities': getActivities,
+  'GET /api/fake_list': getFakeList,
+  'POST /api/forms': forms,
+  'GET /api/tags': tags,
 }

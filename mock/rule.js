@@ -125,7 +125,17 @@ export function postRule(req, res, u, b) {
   }
 }
 
+const postRuleDoc = {
+  $params: {
+    pageSize: {
+      desc: '分页',
+      exp: 2,
+    },
+  },
+  $body: postRule,
+}
+
 export default {
-  getRule,
-  postRule,
+  'GET /api/rule': getRule,
+  'POST /api/rule': postRuleDoc,
 }
