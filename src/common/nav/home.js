@@ -1,5 +1,5 @@
-import React from 'react'
-import Route from 'src/components/Route'
+import React from 'react';
+import Route from 'src/components/Route';
 
 export default
   <Route name="首页" layout="BasicLayout" models={['/user', '/login/login']} page={() => import('../../layouts/BasicLayout')}>
@@ -39,4 +39,4 @@ export default
       <Route name="404" path="/404" page="/Exception/404" />
       <Route name="500" path="/500" page="/Exception/500" />
     </Route>
-  </Route>
+  </Route>;

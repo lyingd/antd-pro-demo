@@ -1,35 +1,35 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'dva'
+import React, { PureComponent } from 'react';
+import { connect } from 'dva';
 import {
   Form, Input, DatePicker, Select, Button, Card, InputNumber, Radio, Icon, Tooltip,
-} from 'antd'
-import PageHeaderLayout from 'src/layouts/PageHeaderLayout'
-import styles from './style.less'
+} from 'antd';
+import PageHeaderLayout from 'src/layouts/PageHeaderLayout';
+import styles from './style.less';
 
-const FormItem = Form.Item
-const { Option } = Select
-const { RangePicker } = DatePicker
-const { TextArea } = Input
+const FormItem = Form.Item;
+const { Option } = Select;
+const { RangePicker } = DatePicker;
+const { TextArea } = Input;
 
-@connect(state => ({
-  submitting: state.form.regularFormSubmitting,
+@connect(({ loading }) => ({
+  submitting: loading.effects['form/submitRegularForm'],
 }))
 @Form.create()
 export default class BasicForms extends PureComponent {
   handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         this.props.dispatch({
           type: 'form/submitRegularForm',
           payload: values,
-        })
+        });
       }
-    })
+    });
   }
   render() {
-    const { submitting } = this.props
-    const { getFieldDecorator, getFieldValue } = this.props.form
+    const { submitting } = this.props;
+    const { getFieldDecorator, getFieldValue } = this.props.form;
 
     const formItemLayout = {
       labelCol: {
@@ -41,14 +41,14 @@ export default class BasicForms extends PureComponent {
         sm: { span: 12 },
         md: { span: 10 },
       },
-    }
+    };
 
     const submitFormLayout = {
       wrapperCol: {
         xs: { span: 24, offset: 0 },
         sm: { span: 10, offset: 7 },
       },
-    }
+    };
 
     return (
       <PageHeaderLayout title="基础表单" content="表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。">
@@ -156,22 +156,21 @@ export default class BasicForms extends PureComponent {
                     <Radio value="3">不公开</Radio>
                   </Radio.Group>
                 )}
-                <FormItem>
-                  {getFieldDecorator('publicUsers', {
-                    })(
-                      <Select
-                        mode="multiple"
-                        placeholder="公开给"
-                        style={{
-                          margin: '8px 0',
-                          display: getFieldValue('public') === '2' ? 'block' : 'none',
-                        }}
-                      >
-                        <Option value="1">同事甲</Option>
-                        <Option value="2">同事乙</Option>
-                        <Option value="3">同事丙</Option>
-                      </Select>
-                    )}
+                <FormItem style={{ marginBottom: 0 }}>
+                  {getFieldDecorator('publicUsers')(
+                    <Select
+                      mode="multiple"
+                      placeholder="公开给"
+                      style={{
+                        margin: '8px 0',
+                        display: getFieldValue('public') === '2' ? 'block' : 'none',
+                      }}
+                    >
+                      <Option value="1">同事甲</Option>
+                      <Option value="2">同事乙</Option>
+                      <Option value="3">同事丙</Option>
+                    </Select>
+                  )}
                 </FormItem>
               </div>
             </FormItem>
@@ -184,6 +183,6 @@ export default class BasicForms extends PureComponent {
           </Form>
         </Card>
       </PageHeaderLayout>
-    )
+    );
   }
 }

@@ -1,4 +1,4 @@
-import { fakeChartData } from 'src/services/api'
+import { fakeChartData } from 'src/services/api';
 
 export default {
   namespace: 'chart',
@@ -19,24 +19,20 @@ export default {
 
   effects: {
     *fetch(_, { call, put }) {
-      yield put({
-        type: 'changeLoading',
-        payload: true,
-      })
-      const response = yield call(fakeChartData)
+      const response = yield call(fakeChartData);
       yield put({
         type: 'save',
         payload: response,
-      })
+      });
     },
     *fetchSalesData(_, { call, put }) {
-      const response = yield call(fakeChartData)
+      const response = yield call(fakeChartData);
       yield put({
         type: 'save',
         payload: {
           salesData: response.salesData,
         },
-      })
+      });
     },
   },
 
@@ -45,8 +41,7 @@ export default {
       return {
         ...state,
         ...payload,
-        loading: false,
-      }
+      };
     },
     clear() {
       return {
@@ -60,13 +55,7 @@ export default {
         salesTypeDataOnline: [],
         salesTypeDataOffline: [],
         radarData: [],
-      }
-    },
-    changeLoading(state, { payload }) {
-      return {
-        ...state,
-        loading: payload,
-      }
+      };
     },
   },
-}
+};

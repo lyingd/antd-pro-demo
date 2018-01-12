@@ -1,17 +1,18 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'dva'
-import { Row, Col, Card, Form, Input, Select, Icon, Button, Dropdown, Menu, InputNumber, DatePicker, Modal, message } from 'antd'
-import StandardTable from 'src/components/StandardTable'
-import PageHeaderLayout from 'src/layouts/PageHeaderLayout'
+import React, { PureComponent } from 'react';
+import { connect } from 'dva';
+import { Row, Col, Card, Form, Input, Select, Icon, Button, Dropdown, Menu, InputNumber, DatePicker, Modal, message } from 'antd';
+import StandardTable from 'ant-design-pro/lib/StandardTable';
+import PageHeaderLayout from 'src/layouts/PageHeaderLayout';
 
-import styles from './TableList.less'
+import styles from './TableList.less';
 
-const FormItem = Form.Item
-const { Option } = Select
-const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',')
+const FormItem = Form.Item;
+const { Option } = Select;
+const getValue = obj => Object.keys(obj).map(key => obj[key]).join(',');
 
-@connect(state => ({
-  rule: state.rule,
+@connect(({ rule, loading }) => ({
+  rule,
+  loading: loading.models.rule,
 }))
 @Form.create()
 export default class TableList extends PureComponent {
@@ -21,64 +22,64 @@ export default class TableList extends PureComponent {
     expandForm: false,
     selectedRows: [],
     formValues: {},
-  }
+  };
 
   componentDidMount() {
-    const { dispatch } = this.props
+    const { dispatch } = this.props;
     dispatch({
       type: 'rule/fetch',
-    })
+    });
   }
 
   handleStandardTableChange = (pagination, filtersArg, sorter) => {
-    const { dispatch } = this.props
-    const { formValues } = this.state
+    const { dispatch } = this.props;
+    const { formValues } = this.state;
 
     const filters = Object.keys(filtersArg).reduce((obj, key) => {
-      const newObj = { ...obj }
-      newObj[key] = getValue(filtersArg[key])
-      return newObj
-    }, {})
+      const newObj = { ...obj };
+      newObj[key] = getValue(filtersArg[key]);
+      return newObj;
+    }, {});
 
     const params = {
       currentPage: pagination.current,
       pageSize: pagination.pageSize,
       ...formValues,
       ...filters,
-    }
+    };
     if (sorter.field) {
-      params.sorter = `${sorter.field}_${sorter.order}`
+      params.sorter = `${sorter.field}_${sorter.order}`;
     }
 
     dispatch({
       type: 'rule/fetch',
       payload: params,
-    })
+    });
   }
 
   handleFormReset = () => {
-    const { form, dispatch } = this.props
-    form.resetFields()
+    const { form, dispatch } = this.props;
+    form.resetFields();
     this.setState({
       formValues: {},
-    })
+    });
     dispatch({
       type: 'rule/fetch',
       payload: {},
-    })
+    });
   }
 
   toggleForm = () => {
     this.setState({
       expandForm: !this.state.expandForm,
-    })
+    });
   }
 
   handleMenuClick = (e) => {
-    const { dispatch } = this.props
-    const { selectedRows } = this.state
+    const { dispatch } = this.props;
+    const { selectedRows } = this.state;
 
-    if (!selectedRows) return
+    if (!selectedRows) return;
 
     switch (e.key) {
       case 'remove':
@@ -90,55 +91,55 @@ export default class TableList extends PureComponent {
           callback: () => {
             this.setState({
               selectedRows: [],
-            })
+            });
           },
-        })
-        break
+        });
+        break;
       default:
-        break
+        break;
     }
   }
 
   handleSelectRows = (rows) => {
     this.setState({
       selectedRows: rows,
-    })
+    });
   }
 
   handleSearch = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const { dispatch, form } = this.props
+    const { dispatch, form } = this.props;
 
     form.validateFields((err, fieldsValue) => {
-      if (err) return
+      if (err) return;
 
       const values = {
         ...fieldsValue,
         updatedAt: fieldsValue.updatedAt && fieldsValue.updatedAt.valueOf(),
-      }
+      };
 
       this.setState({
         formValues: values,
-      })
+      });
 
       dispatch({
         type: 'rule/fetch',
         payload: values,
-      })
-    })
+      });
+    });
   }
 
   handleModalVisible = (flag) => {
     this.setState({
       modalVisible: !!flag,
-    })
+    });
   }
 
   handleAddInput = (e) => {
     this.setState({
       addInputValue: e.target.value,
-    })
+    });
   }
 
   handleAdd = () => {
@@ -147,16 +148,16 @@ export default class TableList extends PureComponent {
       payload: {
         description: this.state.addInputValue,
       },
-    })
+    });
 
-    message.success('添加成功')
+    message.success('添加成功');
     this.setState({
       modalVisible: false,
-    })
+    });
   }
 
   renderSimpleForm() {
-    const { getFieldDecorator } = this.props.form
+    const { getFieldDecorator } = this.props.form;
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
@@ -188,11 +189,11 @@ export default class TableList extends PureComponent {
           </Col>
         </Row>
       </Form>
-    )
+    );
   }
 
   renderAdvancedForm() {
-    const { getFieldDecorator } = this.props.form
+    const { getFieldDecorator } = this.props.form;
     return (
       <Form onSubmit={this.handleSearch} layout="inline">
         <Row gutter={{ md: 8, lg: 24, xl: 48 }}>
@@ -260,23 +261,23 @@ export default class TableList extends PureComponent {
           </span>
         </div>
       </Form>
-    )
+    );
   }
 
   renderForm() {
-    return this.state.expandForm ? this.renderAdvancedForm() : this.renderSimpleForm()
+    return this.state.expandForm ? this.renderAdvancedForm() : this.renderSimpleForm();
   }
 
   render() {
-    const { rule: { loading: ruleLoading, data } } = this.props
-    const { selectedRows, modalVisible, addInputValue } = this.state
+    const { rule: { data }, loading } = this.props;
+    const { selectedRows, modalVisible, addInputValue } = this.state;
 
     const menu = (
       <Menu onClick={this.handleMenuClick} selectedKeys={[]}>
         <Menu.Item key="remove">删除</Menu.Item>
         <Menu.Item key="approval">批量审批</Menu.Item>
       </Menu>
-    )
+    );
 
     return (
       <PageHeaderLayout title="查询表格">
@@ -304,7 +305,7 @@ export default class TableList extends PureComponent {
             </div>
             <StandardTable
               selectedRows={selectedRows}
-              loading={ruleLoading}
+              loading={loading}
               data={data}
               onSelectRow={this.handleSelectRows}
               onChange={this.handleStandardTableChange}
@@ -326,6 +327,6 @@ export default class TableList extends PureComponent {
           </FormItem>
         </Modal>
       </PageHeaderLayout>
-    )
+    );
   }
 }

@@ -1,14 +1,14 @@
-import React, { PureComponent } from 'react'
-import moment from 'moment'
-import { connect } from 'dva'
-import { Link } from 'dva/router'
-import { Row, Col, Card, List, Avatar } from 'antd'
+import React, { PureComponent } from 'react';
+import moment from 'moment';
+import { connect } from 'dva';
+import { Link } from 'dva/router';
+import { Row, Col, Card, List, Avatar } from 'antd';
 
-import PageHeaderLayout from 'src/layouts/PageHeaderLayout'
-import EditableLinkGroup from 'src/components/EditableLinkGroup'
-import { Radar } from 'src/components/Charts'
+import PageHeaderLayout from 'src/layouts/PageHeaderLayout';
+import EditableLinkGroup from 'ant-design-pro/lib/EditableLinkGroup';
+import { Radar } from 'ant-design-pro/lib/Charts';
 
-import styles from './Workplace.less'
+import styles from './Workplace.less';
 
 const links = [
   {
@@ -35,78 +35,80 @@ const links = [
     title: '操作六',
     href: '',
   },
-]
+];
 
 const members = [
   {
     id: 'members-1',
     title: '科学搬砖组',
-    logo: '/eximages/BiazfanxmamNRoxxVxka.png',
+    logo: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
     link: '',
   },
   {
     id: 'members-2',
     title: '程序员日常',
-    logo: '/eximages/cnrhVkzwxjPwAaCfPbdc.png',
+    logo: 'https://gw.alipayobjects.com/zos/rmsportal/cnrhVkzwxjPwAaCfPbdc.png',
     link: '',
   },
   {
     id: 'members-3',
     title: '设计天团',
-    logo: '/eximages/gaOngJwsRYRaVAuXXcmB.png',
+    logo: 'https://gw.alipayobjects.com/zos/rmsportal/gaOngJwsRYRaVAuXXcmB.png',
     link: '',
   },
   {
     id: 'members-4',
     title: '中二少女团',
-    logo: '/eximages/ubnKSIfAJTxIgXOKlciN.png',
+    logo: 'https://gw.alipayobjects.com/zos/rmsportal/ubnKSIfAJTxIgXOKlciN.png',
     link: '',
   },
   {
     id: 'members-5',
     title: '骗你学计算机',
-    logo: '/eximages/WhxKECPNujWoWEFNdnJE.png',
+    logo: 'https://gw.alipayobjects.com/zos/rmsportal/WhxKECPNujWoWEFNdnJE.png',
     link: '',
   },
-]
+];
 
-@connect(state => ({
-  project: state.project,
-  activities: state.activities,
-  chart: state.chart,
+@connect(({ project, activities, chart, loading }) => ({
+  project,
+  activities,
+  chart,
+  projectLoading: loading.effects['project/fetchNotice'],
+  activitiesLoading: loading.effects['activities/fetchList'],
 }))
 export default class Workplace extends PureComponent {
   componentDidMount() {
-    const { dispatch } = this.props
+    const { dispatch } = this.props;
     dispatch({
       type: 'project/fetchNotice',
-    })
+    });
     dispatch({
       type: 'activities/fetchList',
-    })
+    });
     dispatch({
       type: 'chart/fetch',
-    })
+    });
   }
 
   componentWillUnmount() {
-    const { dispatch } = this.props
+    const { dispatch } = this.props;
     dispatch({
       type: 'chart/clear',
-    })
+    });
   }
 
   renderActivities() {
     const {
       activities: { list },
-    } = this.props
+    } = this.props;
     return list.map((item) => {
       const events = item.template.split(/@\{([^{}]*)\}/gi).map((key) => {
         if (item[key]) {
-          return <a href={item[key].link} key={item[key].name}>{item[key].name}</a>
+          return <a href={item[key].link} key={item[key].name}>{item[key].name}</a>;
         }
-        return key
-      })
+        return key;
+      });
       return (
         <List.Item key={item.id}>
           <List.Item.Meta
@@ -114,7 +116,7 @@ export default class Workplace extends PureComponent {
             title={
               <span>
                 <a className={styles.username}>{item.user.name}</a>
-                &nbsp
+                &nbsp;
                 <span className={styles.event}>{events}</span>
               </span>
             }
@@ -125,50 +127,51 @@ export default class Workplace extends PureComponent {
             }
           />
         </List.Item>
-      )
-    })
+      );
+    });
   }
 
   render() {
     const {
-      project: { loading: projectLoading, notice },
-      activities: { loading: activitiesLoading },
+      project: { notice },
+      projectLoading,
+      activitiesLoading,
       chart: { radarData },
-    } = this.props
+    } = this.props;
 
     const pageHeaderContent = (
       <div className={styles.pageHeaderContent}>
         <div className={styles.avatar}>
-          <Avatar size="large" src="/eximages/BiazfanxmamNRoxxVxka.png" />
+          <Avatar size="large" src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
         </div>
         <div className={styles.content}>
           <div className={styles.contentTitle}>早安，曲丽丽，祝你开心每一天！</div>
           <div>交互专家 | 蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED</div>
         </div>
       </div>
-    )
+    );
 
-    const pageHeaderExtra = (
-      <div className={styles.pageHeaderExtra}>
-        <div>
+    const extraContent = (
+      <div className={styles.extraContent}>
+        <div className={styles.statItem}>
           <p>项目数</p>
           <p>56</p>
         </div>
-        <div>
+        <div className={styles.statItem}>
           <p>团队内排名</p>
           <p>8<span> / 24</span></p>
         </div>
-        <div>
+        <div className={styles.statItem}>
           <p>项目访问</p>
           <p>2,223</p>
         </div>
       </div>
-    )
+    );
 
     return (
       <PageHeaderLayout
         content={pageHeaderContent}
-        extraContent={pageHeaderExtra}
+        extraContent={extraContent}
       >
         <Row gutter={24}>
           <Col xl={16} lg={24} md={24} sm={24} xs={24}>
@@ -267,6 +270,6 @@ export default class Workplace extends PureComponent {
           </Col>
         </Row>
       </PageHeaderLayout>
-    )
+    );
   }
 }

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from 'react';
 
 const Route = ({
   children,
@@ -22,6 +22,6 @@ const Route = ({
     {...restProps}
   >{children}
   </PureComponent>
-)
+);
 
-export default Route
+export default Route;

@@ -1,21 +1,22 @@
-import React, { PureComponent } from 'react'
-import moment from 'moment'
-import { connect } from 'dva'
-import { Row, Col, Form, Card, Select, List } from 'antd'
+import React, { PureComponent } from 'react';
+import moment from 'moment';
+import { connect } from 'dva';
+import { Row, Col, Form, Card, Select, List } from 'antd';
 
-import StandardFormRow from 'src/components/StandardFormRow'
-import TagSelect from 'src/components/TagSelect'
-import AvatarList from 'src/components/AvatarList'
+import StandardFormRow from 'ant-design-pro/lib/StandardFormRow';
+import TagSelect from 'ant-design-pro/lib/TagSelect';
+import AvatarList from 'ant-design-pro/lib/AvatarList';
 
-import styles from './Projects.less'
+import styles from './Projects.less';
 
-const { Option } = Select
-const FormItem = Form.Item
+const { Option } = Select;
+const FormItem = Form.Item;
 
 /* eslint react/no-array-index-key: 0 */
 @Form.create()
-@connect(state => ({
-  list: state.list,
+@connect(({ list, loading }) => ({
+  list,
+  loading: loading.models.list,
 }))
 export default class CoverCardList extends PureComponent {
   componentDidMount() {
@@ -24,11 +25,11 @@ export default class CoverCardList extends PureComponent {
       payload: {
         count: 8,
       },
-    })
+    });
   }
 
   handleFormSubmit = () => {
-    const { form, dispatch } = this.props
+    const { form, dispatch } = this.props;
     // setTimeout 用于保证获取表单值是在所有表单字段更新完毕的时候
     setTimeout(() => {
       form.validateFields((err) => {
@@ -39,15 +40,15 @@ export default class CoverCardList extends PureComponent {
             payload: {
               count: 8,
             },
-          })
+          });
         }
-      })
-    }, 0)
+      });
+    }, 0);
   }
 
   render() {
-    const { list: { list = [], loading }, form } = this.props
-    const { getFieldDecorator } = form
+    const { list: { list = [] }, loading, form } = this.props;
+    const { getFieldDecorator } = form;
 
     const cardList = list ? (
       <List
@@ -86,14 +87,14 @@ export default class CoverCardList extends PureComponent {
           </List.Item>
         )}
       />
-    ) : null
+    ) : null;
 
     const formItemLayout = {
       wrapperCol: {
         xs: { span: 24 },
         sm: { span: 16 },
       },
-    }
+    };
 
     return (
       <div className={styles.coverCardList}>
@@ -124,7 +125,7 @@ export default class CoverCardList extends PureComponent {
               grid
               last
             >
-              <Row gutter={24}>
+              <Row gutter={16}>
                 <Col lg={8} md={10} sm={10} xs={24}>
                   <FormItem
                     {...formItemLayout}
@@ -166,6 +167,6 @@ export default class CoverCardList extends PureComponent {
           {cardList}
         </div>
       </div>
-    )
+    );
   }
 }

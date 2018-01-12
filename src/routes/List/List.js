@@ -1,30 +1,26 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { routerRedux, Route, Switch } from 'dva/router'
-import { connect } from 'dva'
-import { Input } from 'antd'
-import PageHeaderLayout from 'src/layouts/PageHeaderLayout'
+import React, { Component } from 'react';
+import { routerRedux, Route, Switch } from 'dva/router';
+import { connect } from 'dva';
+import { Input } from 'antd';
+import PageHeaderLayout from 'src/layouts/PageHeaderLayout';
+import { getRoutes } from 'src/utils/utils';
 
 @connect()
 export default class SearchList extends Component {
-  static contextTypes = {
-    routeData: PropTypes.array,
-  }
-
   handleTabChange = (key) => {
-    const { dispatch, match } = this.props
+    const { dispatch, match } = this.props;
     switch (key) {
       case 'articles':
-        dispatch(routerRedux.push(`${match.url}/articles`))
-        break
+        dispatch(routerRedux.push(`${match.url}/articles`));
+        break;
       case 'applications':
-        dispatch(routerRedux.push(`${match.url}/applications`))
-        break
+        dispatch(routerRedux.push(`${match.url}/applications`));
+        break;
       case 'projects':
-        dispatch(routerRedux.push(`${match.url}/projects`))
-        break
+        dispatch(routerRedux.push(`${match.url}/projects`));
+        break;
       default:
-        break
+        break;
     }
   }
 
@@ -38,7 +34,7 @@ export default class SearchList extends Component {
     }, {
       key: 'projects',
       tab: '项目',
-    }]
+    }];
 
     const mainSearch = (
       <div style={{ textAlign: 'center' }}>
@@ -50,17 +46,17 @@ export default class SearchList extends Component {
           style={{ width: 522 }}
         />
       </div>
-    )
+    );
 
-    const { match } = this.props
-    const { routeData } = this.context
-    const routes = routeData.filter(item => item.path === match.path)[0].children
+    const { match, routerData, location } = this.props;
+    const routes = getRoutes(match.path, routerData);
 
     return (
       <PageHeaderLayout
         title="搜索列表"
         content={mainSearch}
         tabList={tabList}
+        activeTabKey={location.pathname.replace(`${match.path}/`, '')}
         onTabChange={this.handleTabChange}
       >
         <Switch>
@@ -68,15 +64,16 @@ export default class SearchList extends Component {
             routes.map(item =>
               (
                 <Route
-                  key={item.path}
-                  path={`${match.path}/${item.path}`}
+                  key={item.key}
+                  path={item.path}
                   component={item.component}
+                  exact={item.exact}
                 />
               )
             )
           }
         </Switch>
       </PageHeaderLayout>
-    )
+    );
   }
 }

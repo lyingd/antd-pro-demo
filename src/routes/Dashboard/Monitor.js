@@ -1,30 +1,38 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'dva'
-import { Row, Col, Card, Tooltip } from 'antd'
-import numeral from 'numeral'
+import React, { PureComponent } from 'react';
+import { connect } from 'dva';
+import { Row, Col, Card, Tooltip } from 'antd';
+import numeral from 'numeral';
+import Authorized from 'src/utils/Authorized';
+import { Pie, WaterWave, Gauge, TagCloud } from 'ant-design-pro/lib/Charts';
+import NumberInfo from 'ant-design-pro/lib/NumberInfo';
+import CountDown from 'ant-design-pro/lib/CountDown';
+import ActiveChart from 'ant-design-pro/lib/ActiveChart';
+import styles from './Monitor.less';
 
-import { Pie, WaterWave, Gauge, TagCloud } from 'src/components/Charts'
-import NumberInfo from 'src/components/NumberInfo'
-import CountDown from 'src/components/CountDown'
-import ActiveChart from 'src/components/ActiveChart'
+const { Secured } = Authorized;
 
-import styles from './Monitor.less'
+const targetTime = new Date().getTime() + 3900000;
 
-const targetTime = new Date().getTime() + 3900000
-
-@connect(state => ({
-  monitor: state.monitor,
+// use permission as a parameter
+const havePermissionAsync = new Promise((resolve) => {
+  // Call resolve on behalf of passed
+  setTimeout(() => resolve(), 1000);
+});
+@Secured(havePermissionAsync)
+@connect(({ monitor, loading }) => ({
+  monitor,
+  loading: loading.models.monitor,
 }))
 export default class Monitor extends PureComponent {
   componentDidMount() {
     this.props.dispatch({
       type: 'monitor/fetchTags',
-    })
+    });
   }
 
   render() {
-    const { monitor } = this.props
-    const { tags } = monitor
+    const { monitor, loading } = this.props;
+    const { tags } = monitor;
 
     return (
       <div>
@@ -46,10 +54,7 @@ export default class Monitor extends PureComponent {
                   />
                 </Col>
                 <Col md={6} sm={12} xs={24}>
-                  <NumberInfo
-                    subTitle="活动剩余时间"
-                    total={<CountDown target={targetTime} />}
-                  />
+                  <NumberInfo subTitle="活动剩余时间" total={<CountDown target={targetTime} />} />
                 </Col>
                 <Col md={6} sm={12} xs={24}>
                   <NumberInfo
@@ -61,7 +66,7 @@ export default class Monitor extends PureComponent {
               </Row>
               <div className={styles.mapChart}>
                 <Tooltip title="等待后期实现">
-                  <img src="/eximages/HBWnDEUXCnGnGrRfrpKa.png" alt="map" />
+                  <img src="https://gw.alipayobjects.com/zos/rmsportal/HBWnDEUXCnGnGrRfrpKa.png" alt="map" />
                 </Tooltip>
               </div>
             </Card>
@@ -80,15 +85,15 @@ export default class Monitor extends PureComponent {
                 format={(val) => {
                   switch (parseInt(val, 10)) {
                     case 20:
-                      return '差'
+                      return '差';
                     case 40:
-                      return '中'
+                      return '中';
                     case 60:
-                      return '良'
+                      return '良';
                     case 80:
-                      return '优'
+                      return '优';
                     default:
-                      return ''
+                      return '';
                   }
                 }}
                 title="跳出率"
@@ -106,7 +111,7 @@ export default class Monitor extends PureComponent {
               bordered={false}
               className={styles.pieCard}
             >
-              <Row gutter={4} style={{ padding: '16px 0' }}>
+              <Row style={{ padding: '16px 0' }}>
                 <Col span={8}>
                   <Pie
                     animate={false}
@@ -143,7 +148,7 @@ export default class Monitor extends PureComponent {
             </Card>
           </Col>
           <Col xl={6} lg={12} sm={24} xs={24} style={{ marginBottom: 24 }}>
-            <Card title="热门搜索" bordered={false} bodyStyle={{ overflow: 'hidden' }}>
+            <Card title="热门搜索" loading={loading} bordered={false} bodyStyle={{ overflow: 'hidden' }}>
               <TagCloud
                 data={tags}
                 height={161}
@@ -161,6 +166,6 @@ export default class Monitor extends PureComponent {
           </Col>
         </Row>
       </div>
-    )
+    );
   }
 }
