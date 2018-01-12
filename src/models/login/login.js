@@ -1,6 +1,6 @@
 import { routerRedux } from 'dva/router'
-import { userLogin } from '~src/services/user'
-import { getCurrentTimestamp } from '~src/utils/utils'
+import { userLogin } from 'src/services/user'
+import { getCurrentTimestamp } from 'src/utils/utils'
 
 export default {
   namespace: 'login',

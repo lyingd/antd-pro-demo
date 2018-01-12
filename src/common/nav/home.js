@@ -1,5 +1,5 @@
 import React from 'react'
-import Route from '~src/components/Route'
+import Route from 'src/components/Route'
 
 export default
   <Route name="首页" layout="BasicLayout" models={['/user', '/login/login']} page={() => import('../../layouts/BasicLayout')}>

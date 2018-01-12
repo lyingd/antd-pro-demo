@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'dva'
 import { Card, Badge, Table, Divider } from 'antd'
-import PageHeaderLayout from '~src/layouts/PageHeaderLayout'
-import DescriptionList from '~src/components/DescriptionList'
+import PageHeaderLayout from 'src/layouts/PageHeaderLayout'
+import DescriptionList from 'src/components/DescriptionList'
 import styles from './BasicProfile.less'
 
 const { Description } = DescriptionList

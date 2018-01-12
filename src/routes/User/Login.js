@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'dva'
 import { Form, Input, Button, Icon, Checkbox, Row, Col, Alert } from 'antd'
 import styles from './Login.less'
-import { MAX_LOGIN_ERROR_COUNT, MAX_LOGIN_ERROR_TIME } from '~src/common/const'
-import { getCurrentTimestamp } from '~src/utils/utils'
+import { MAX_LOGIN_ERROR_COUNT, MAX_LOGIN_ERROR_TIME } from 'src/common/const'
+import { getCurrentTimestamp } from 'src/utils/utils'
 
 const FormItem = Form.Item
 

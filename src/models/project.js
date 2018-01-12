@@ -1,4 +1,4 @@
-import { queryProjectNotice } from '~src/services/api'
+import { queryProjectNotice } from 'src/services/api'
 
 export default {
   namespace: 'project',

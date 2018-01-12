@@ -37,8 +37,5 @@
 		"suppressWelcomeNotice": true
 	},
 	"typescript.quickSuggestionsForPaths": true,
-	"eslint.autoFixOnSave": true,
-	"path-intellisense.mappings": {
-		"~src": "${workspaceRoot}/src"
-	}
+	"eslint.autoFixOnSave": true
 }

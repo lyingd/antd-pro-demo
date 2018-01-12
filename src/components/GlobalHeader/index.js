@@ -3,8 +3,8 @@ import { Layout, Menu, Icon, Spin, Tag, Dropdown, Avatar, message } from 'antd'
 import moment from 'moment'
 import groupBy from 'lodash/groupBy'
 import Debounce from 'lodash-decorators/debounce'
-import NoticeIcon from '~src/components/NoticeIcon'
-import HeaderSearch from '~src/components/HeaderSearch'
+import NoticeIcon from 'src/components/NoticeIcon'
+import HeaderSearch from 'src/components/HeaderSearch'
 import styles from './index.less'
 
 const { Header } = Layout

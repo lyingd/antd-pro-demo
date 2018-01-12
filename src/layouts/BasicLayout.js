@@ -6,10 +6,10 @@ import { connect } from 'dva'
 import { Route, Redirect, Switch } from 'dva/router'
 import { ContainerQuery } from 'react-container-query'
 import classNames from 'classnames'
-import GlobalHeader from '~src/components/GlobalHeader'
-import GlobalFooter from '~src/components/GlobalFooter'
-import SiderMenu from '~src/components/SiderMenu'
-import NotFound from '~src/routes/Exception/404'
+import GlobalHeader from 'src/components/GlobalHeader'
+import GlobalFooter from 'src/components/GlobalFooter'
+import SiderMenu from 'src/components/SiderMenu'
+import NotFound from 'src/routes/Exception/404'
 
 const { Content } = Layout
 

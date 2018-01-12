@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react'
 import { connect } from 'dva'
 import { Card, Button, Icon, List } from 'antd'
 
-import PageHeaderLayout from '~src/layouts/PageHeaderLayout'
-import Ellipsis from '~src/components/Ellipsis'
+import PageHeaderLayout from 'src/layouts/PageHeaderLayout'
+import Ellipsis from 'src/components/Ellipsis'
 
 import styles from './CardList.less'
 

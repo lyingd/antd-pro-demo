@@ -1,4 +1,4 @@
-import { query as queryUsers, queryCurrent } from '~src/services/user'
+import { query as queryUsers, queryCurrent } from 'src/services/user'
 
 export default {
   namespace: 'user',

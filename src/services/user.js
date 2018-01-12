@@ -1,4 +1,4 @@
-import request from '~src/utils/request'
+import request from 'src/utils/request'
 
 export async function query() {
   return request('/api/users')

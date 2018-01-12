@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import { connect } from 'dva'
 import { Row, Col, Card, Form, Input, Select, Icon, Button, Dropdown, Menu, InputNumber, DatePicker, Modal, message } from 'antd'
-import StandardTable from '~src/components/StandardTable'
-import PageHeaderLayout from '~src/layouts/PageHeaderLayout'
+import StandardTable from 'src/components/StandardTable'
+import PageHeaderLayout from 'src/layouts/PageHeaderLayout'
 
 import styles from './TableList.less'
 

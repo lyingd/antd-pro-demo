@@ -1,5 +1,5 @@
 import React from 'react'
-import Route from '~src/components/Route'
+import Route from 'src/components/Route'
 import dynamic from 'dva/dynamic'
 import isString from 'lodash/isString'
 import isArray from 'lodash/isArray'

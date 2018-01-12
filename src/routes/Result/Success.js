@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Row, Col, Icon, Steps, Card } from 'antd'
-import Result from '~src/components/Result'
-import PageHeaderLayout from '~src/layouts/PageHeaderLayout'
+import Result from 'src/components/Result'
+import PageHeaderLayout from 'src/layouts/PageHeaderLayout'
 
 const { Step } = Steps
 
