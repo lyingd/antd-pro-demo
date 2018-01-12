@@ -1,6 +1,6 @@
-import { routerRedux } from 'dva/router';
-import { userLogin } from 'src/services/user';
-import { getCurrentTimestamp } from 'src/utils/utils';
+import { routerRedux } from 'dva/router'
+import { userLogin } from 'src/services/user'
+import { getCurrentTimestamp } from 'src/utils/utils'
 
 export default {
   namespace: 'login',
@@ -15,9 +15,9 @@ export default {
       yield put({
         type: 'changeSubmitting',
         payload: true,
-      });
+      })
       try {
-        const response = yield call(userLogin, payload);
+        const response = yield call(userLogin, payload)
         if (response.status === 'ok') {
           yield put({
             type: 'changeLoginStatus',
@@ -25,15 +25,15 @@ export default {
               status: response.status,
               errorLogs: [],
             },
-          });
-          yield put(routerRedux.push('/'));
+          })
+          yield put(routerRedux.push('/'))
         } else {
           yield put({
             type: 'logError',
             payload: {
               time: getCurrentTimestamp(),
             },
-          });
+          })
         }
       } catch (e) {
         yield put({
@@ -42,7 +42,7 @@ export default {
             time: getCurrentTimestamp(),
             error: e,
           },
-        });
+        })
       }
     },
     *logout(_, { put }) {
@@ -51,8 +51,8 @@ export default {
         payload: {
           status: false,
         },
-      });
-      yield put(routerRedux.push('/user/login'));
+      })
+      yield put(routerRedux.push('/user/login'))
     },
   },
 
@@ -63,13 +63,13 @@ export default {
         status,
         errorLogs,
         submitting: false,
-      };
+      }
     },
     changeSubmitting(state, { payload }) {
       return {
         ...state,
         submitting: payload,
-      };
+      }
     },
     logError(state, { payload }) {
       return {
@@ -80,7 +80,7 @@ export default {
         ],
         status: 'error',
         submitting: false,
-      };
+      }
     },
   },
-};
+}

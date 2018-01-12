@@ -12,7 +12,7 @@ const currentUser = {
     userid: '00000001',
     notifyCount: 12,
   },
-};
+}
 
 const users = [{
   key: '1',
@@ -29,9 +29,9 @@ const users = [{
   name: 'Joe Black',
   age: 32,
   address: 'Sidney No. 1 Lake Park',
-}];
+}]
 
 export default {
   'GET /api/currentUser': currentUser,
   'GET /api/users': users,
-};
+}

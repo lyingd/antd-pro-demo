@@ -57,7 +57,10 @@
     "no-restricted-globals": [0],
     "require-yield": [1],
     "compat/compat": "error",
-    "import/first": ["off"]
+    "semi": [2, "never"],
+    "import/first": [0],
+    "no-multi-spaces": [0],
+    "no-underscore-dangle": ["error", { "allow": ["_store"] }]
   },
   "parserOptions": {
     "ecmaFeatures": {

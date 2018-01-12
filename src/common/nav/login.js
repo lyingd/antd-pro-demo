@@ -1,5 +1,5 @@
-import React from 'react';
-import Route from 'src/components/Route';
+import React from 'react'
+import Route from 'src/components/Route'
 
 export default
   <Route name="用户登录" layout="UserLayout" page={() => import('../../layouts/UserLayout')}>
@@ -8,5 +8,5 @@ export default
       <Route name="注册" path="/register" models={['/login/register']} page="/User/Register" />
       <Route name="注册结果" path="/register-result" page="/User/RegisterResult" />
     </Route>
-  </Route>;
+  </Route>
 
