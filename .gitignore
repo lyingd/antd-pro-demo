@@ -12,8 +12,10 @@ _roadhog-api-doc
 # misc
 .DS_Store
 npm-debug.log*
+yarn-error.log
 
 /coverage
+.idea
+yarn.lock
 
-#local
 .history
