@@ -1,7 +1,7 @@
 import '@babel/polyfill'
 import dva from 'dva'
 import { persistStore, autoRehydrate } from 'redux-persist'
-
+import 'ant-design-pro/dist/ant-design-pro.css'
 
 import createHistory from 'history/createHashHistory'
 // user BrowserHistory

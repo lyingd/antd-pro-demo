@@ -1176,7 +1176,7 @@ ant-design-pro@^1.0.1:
     react-document-title "^2.0.3"
     react-fittext "^1.0.0"
 
-antd@^3.1.1:
+antd@^3.1.0:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/antd/-/antd-3.1.1.tgz#e20d335628ceec50c3a1fd6c73e5a246607ebb1b"
   dependencies:
@@ -4528,18 +4528,6 @@ function.prototype.name@^1.0.3:
 functional-red-black-tree@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
-
-g-cloud@^1.0.2-beta:
-  version "1.0.2-beta"
-  resolved "https://registry.yarnpkg.com/g-cloud/-/g-cloud-1.0.2-beta.tgz#c75e69f2526e0f2702f3d7b43e461a1c1b4f2ac8"
-
-g2-plugin-slider@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/g2-plugin-slider/-/g2-plugin-slider-1.2.1.tgz#c65be15ed88c793d3e34fc0c96ca0c54fd521046"
-
-g2@^2.3.13:
-  version "2.3.13"
-  resolved "https://registry.yarnpkg.com/g2/-/g2-2.3.13.tgz#ca4478230f3292bd3b9a972da63616980b8f6ce9"
 
 gauge@~2.7.3:
   version "2.7.4"
