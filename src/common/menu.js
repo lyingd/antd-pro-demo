@@ -1,3 +1,5 @@
+import { isUrl } from '../utils/utils';
+
 const menuData = [{
   name: 'dashboard',
   icon: 'dashboard',
@@ -94,6 +96,7 @@ const menuData = [{
   }, {
     name: '触发异常',
     path: 'trigger',
+    hideInMenu: true,
   }],
 }, {
   name: '账户',
@@ -115,20 +118,24 @@ const menuData = [{
   icon: 'book',
   path: 'http://pro.ant.design/docs/getting-started',
   target: '_blank',
-}]
+}];
 
 function formatter(data, parentPath = '', parentAuthority) {
   return data.map((item) => {
+    let { path } = item;
+    if (!isUrl(path)) {
+      path = parentPath + item.path;
+    }
     const result = {
       ...item,
-      path: `${parentPath}${item.path}`,
+      path,
       authority: item.authority || parentAuthority,
-    }
+    };
     if (item.children) {
-      result.children = formatter(item.children, `${parentPath}${item.path}/`, item.authority)
+      result.children = formatter(item.children, `${parentPath}${item.path}/`, item.authority);
     }
-    return result
-  })
+    return result;
+  });
 }
 
-export const getMenuData = () => formatter(menuData)
+export const getMenuData = () => formatter(menuData);

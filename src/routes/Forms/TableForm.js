@@ -1,58 +1,59 @@
-import React, { PureComponent } from 'react'
-import { Table, Button, Input, message, Popconfirm, Divider } from 'antd'
-import styles from './style.less'
+import React, { PureComponent } from 'react';
+import { Table, Button, Input, message, Popconfirm, Divider } from 'antd';
+import styles from './style.less';
 
 export default class TableForm extends PureComponent {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       data: props.value,
-    }
+      loading: false,
+    };
   }
   componentWillReceiveProps(nextProps) {
     if ('value' in nextProps) {
       this.setState({
         data: nextProps.value,
-      })
+      });
     }
   }
   getRowByKey(key, newData) {
-    return (newData || this.state.data).filter(item => item.key === key)[0]
+    return (newData || this.state.data).filter(item => item.key === key)[0];
   }
   index = 0;
   cacheOriginData = {};
   handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         this.props.dispatch({
           type: 'form/submit',
           payload: values,
-        })
+        });
       }
-    })
+    });
   }
-  toggleEditable(e, key) {
-    e.preventDefault()
-    const newData = this.state.data.map(item => ({ ...item }))
-    const target = this.getRowByKey(key, newData)
+  toggleEditable=(e, key) => {
+    e.preventDefault();
+    const newData = this.state.data.map(item => ({ ...item }));
+    const target = this.getRowByKey(key, newData);
     if (target) {
       // 进入编辑状态时保存原始数据
       if (!target.editable) {
-        this.cacheOriginData[key] = { ...target }
+        this.cacheOriginData[key] = { ...target };
       }
-      target.editable = !target.editable
-      this.setState({ data: newData })
+      target.editable = !target.editable;
+      this.setState({ data: newData });
     }
   }
   remove(key) {
-    const newData = this.state.data.filter(item => item.key !== key)
-    this.setState({ data: newData })
-    this.props.onChange(newData)
+    const newData = this.state.data.filter(item => item.key !== key);
+    this.setState({ data: newData });
+    this.props.onChange(newData);
   }
   newMember = () => {
-    const newData = this.state.data.map(item => ({ ...item }))
+    const newData = this.state.data.map(item => ({ ...item }));
     newData.push({
       key: `NEW_TEMP_ID_${this.index}`,
       workId: '',
@@ -60,57 +61,66 @@ export default class TableForm extends PureComponent {
       department: '',
       editable: true,
       isNew: true,
-    })
-    this.index += 1
-    this.setState({ data: newData })
+    });
+    this.index += 1;
+    this.setState({ data: newData });
   }
   handleKeyPress(e, key) {
     if (e.key === 'Enter') {
-      this.saveRow(e, key)
+      this.saveRow(e, key);
     }
   }
   handleFieldChange(e, fieldName, key) {
-    const newData = this.state.data.map(item => ({ ...item }))
-    const target = this.getRowByKey(key, newData)
+    const newData = this.state.data.map(item => ({ ...item }));
+    const target = this.getRowByKey(key, newData);
     if (target) {
-      target[fieldName] = e.target.value
-      this.setState({ data: newData })
+      target[fieldName] = e.target.value;
+      this.setState({ data: newData });
     }
   }
   saveRow(e, key) {
-    e.persist()
+    e.persist();
+    this.setState({
+      loading: true,
+    });
     // save field when blur input
     setTimeout(() => {
       if (document.activeElement.tagName === 'INPUT' &&
           document.activeElement !== e.target) {
-        return
+        return;
       }
       if (this.clickedCancel) {
-        this.clickedCancel = false
-        return
+        this.clickedCancel = false;
+        return;
       }
-      const target = this.getRowByKey(key) || {}
+      const target = this.getRowByKey(key) || {};
       if (!target.workId || !target.name || !target.department) {
-        message.error('请填写完整成员信息。')
-        e.target.focus()
-        return
+        message.error('请填写完整成员信息。');
+        e.target.focus();
+        this.setState({
+          loading: false,
+        });
+        return;
       }
-      delete target.isNew
-      this.toggleEditable(e, key)
-      this.props.onChange(this.state.data)
-    }, 10)
+      delete target.isNew;
+      this.toggleEditable(e, key);
+      this.props.onChange(this.state.data);
+      this.setState({
+        loading: false,
+      });
+    }, 500);
   }
   cancel(e, key) {
-    this.clickedCancel = true
-    e.preventDefault()
-    const newData = this.state.data.map(item => ({ ...item }))
-    const target = this.getRowByKey(key, newData)
+    this.clickedCancel = true;
+    e.preventDefault();
+    const newData = this.state.data.map(item => ({ ...item }));
+    const target = this.getRowByKey(key, newData);
     if (this.cacheOriginData[key]) {
-      Object.assign(target, this.cacheOriginData[key])
-      target.editable = false
-      delete this.cacheOriginData[key]
+      Object.assign(target, this.cacheOriginData[key]);
+      target.editable = false;
+      delete this.cacheOriginData[key];
     }
-    this.setState({ data: newData })
+    this.setState({ data: newData });
   }
   render() {
     const columns = [{
@@ -129,9 +139,9 @@ export default class TableForm extends PureComponent {
               onKeyPress={e => this.handleKeyPress(e, record.key)}
               placeholder="成员姓名"
             />
-          )
+          );
         }
-        return text
+        return text;
       },
     }, {
       title: '工号',
@@ -148,9 +158,9 @@ export default class TableForm extends PureComponent {
               onKeyPress={e => this.handleKeyPress(e, record.key)}
               placeholder="工号"
             />
-          )
+          );
         }
-        return text
+        return text;
       },
     }, {
       title: '所属部门',
@@ -167,14 +177,17 @@ export default class TableForm extends PureComponent {
               onKeyPress={e => this.handleKeyPress(e, record.key)}
               placeholder="所属部门"
             />
-          )
+          );
         }
-        return text
+        return text;
       },
     }, {
       title: '操作',
       key: 'action',
       render: (text, record) => {
+        if (!!record.editable && this.state.loading) {
+          return null;
+        }
         if (record.editable) {
           if (record.isNew) {
             return (
@@ -185,7 +198,7 @@ export default class TableForm extends PureComponent {
                   <a>删除</a>
                 </Popconfirm>
               </span>
-            )
+            );
           }
           return (
             <span>
@@ -193,7 +206,7 @@ export default class TableForm extends PureComponent {
               <Divider type="vertical" />
               <a onClick={e => this.cancel(e, record.key)}>取消</a>
             </span>
-          )
+          );
         }
         return (
           <span>
@@ -203,18 +216,19 @@ export default class TableForm extends PureComponent {
               <a>删除</a>
             </Popconfirm>
           </span>
-        )
+        );
       },
-    }]
+    }];
 
     return (
       <div>
         <Table
+          loading={this.state.loading}
           columns={columns}
           dataSource={this.state.data}
           pagination={false}
           rowClassName={(record) => {
-            return record.editable ? styles.editable : ''
+            return record.editable ? styles.editable : '';
           }}
         />
         <Button
@@ -226,6 +240,6 @@ export default class TableForm extends PureComponent {
           新增成员
         </Button>
       </div>
-    )
+    );
   }
 }

@@ -1,11 +1,11 @@
-import React, { PureComponent } from 'react'
-import { connect } from 'dva'
-import { Card, Button, Icon, List } from 'antd'
+import React, { PureComponent } from 'react';
+import { connect } from 'dva';
+import { Card, Button, Icon, List } from 'antd';
 
-import PageHeaderLayout from 'src/layouts/PageHeaderLayout'
-import Ellipsis from 'ant-design-pro/lib/Ellipsis'
+import PageHeaderLayout from '../../layouts/PageHeaderLayout';
+import Ellipsis from 'ant-design-pro/lib/Ellipsis';
 
-import styles from './CardList.less'
+import styles from './CardList.less';
 
 @connect(({ list, loading }) => ({
   list,
@@ -18,11 +18,11 @@ export default class CardList extends PureComponent {
       payload: {
         count: 8,
       },
-    })
+    });
   }
 
   render() {
-    const { list: { list }, loading } = this.props
+    const { list: { list }, loading } = this.props;
 
     const content = (
       <div className={styles.pageHeaderContent}>
@@ -32,23 +32,23 @@ export default class CardList extends PureComponent {
         </p>
         <div className={styles.contentLink}>
           <a>
-            <img alt="" src="/exImages//MjEImQtenlyueSmVEfUD.svg" /> 快速开始
+            <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/MjEImQtenlyueSmVEfUD.svg" /> 快速开始
           </a>
           <a>
-            <img alt="" src="/exImages//NbuDUAuBlIApFuDvWiND.svg" /> 产品简介
+            <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/NbuDUAuBlIApFuDvWiND.svg" /> 产品简介
           </a>
           <a>
-            <img alt="" src="/exImages//ohOEPSYdDTNnyMbGuyLb.svg" /> 产品文档
+            <img alt="" src="https://gw.alipayobjects.com/zos/rmsportal/ohOEPSYdDTNnyMbGuyLb.svg" /> 产品文档
           </a>
         </div>
       </div>
-    )
+    );
 
     const extraContent = (
       <div className={styles.extraImg}>
-        <img alt="这是一个标题" src="/exImages//RzwpdLnhmvDJToTdfDPe.png" />
+        <img alt="这是一个标题" src="https://gw.alipayobjects.com/zos/rmsportal/RzwpdLnhmvDJToTdfDPe.png" />
       </div>
-    )
+    );
 
     return (
       <PageHeaderLayout
@@ -85,6 +85,6 @@ export default class CardList extends PureComponent {
           />
         </div>
       </PageHeaderLayout>
-    )
+    );
   }
 }
